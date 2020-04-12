@@ -39,30 +39,45 @@ class SegmentationProblem(util.Problem):
 
     def isState(self, state):
         """ Metodo que implementa verificacao de estado """
-        raise NotImplementedError
+        for i in range(state):
+            if len(state[i]>len(self.query)): return False
+        return True
 
     def initialState(self):
         """ Metodo que implementa retorno da posicao inicial """
-        raise NotImplementedError
+        self.state = (self.query, str())
+        return self.state
 
     def actions(self, state):
         """ Metodo que implementa retorno da lista de acoes validas
         para um determinado estado
         """
-        raise NotImplementedError
+        acoes = [] #lista de tuplas
+        entrada = state[0]
+        for i in range(0, len(entrada)):
+            dire=entrada[-i-1:]
+            esq = entrada[:-i-1]
+            if state[1] == '': add = [dire]
+            else: add = [state[1]]+[dire]
+            add = ' '.join(add)
+            acoes.append((esq, add))
+        return acoes
 
     def nextState(self, state, action):
         """ Metodo que implementa funcao de transicao """
-        raise NotImplementedError
+        nxtS = (action[0], action[1])
+        return nxtS
 
     def isGoalState(self, state):
         """ Metodo que implementa teste de meta """
-        raise NotImplementedError
+        return state[0] == ''
 
     def stepCost(self, state, action):
         """ Metodo que implementa funcao custo """
-        raise NotImplementedError
-
+        #o custo sera uma subtracao entre o custo da acao e do estado
+        custoEstado = sum([self.unigramCost(i) for i in state[1].split()])
+        custoAcao = sum([self.unigramCost(i) for i in action[1].split()])
+        return custoAcao - custoEstado
 
 def segmentWords(query, unigramCost):
 
@@ -70,10 +85,13 @@ def segmentWords(query, unigramCost):
         return ''
      
     # BEGIN_YOUR_CODE 
+    sp = SegmentationProblem(query, unigramCost)
+    goal = util.uniformCostSearch(sp)
+    return ' '.join(reversed(goal.state[1].split()))
     # Voce pode usar a função getSolution para recuperar a sua solução a partir do no meta
     # valid,solution  = util.getSolution(goalNode,problem)
 
-    raise NotImplementedError
+    #return resp
 
     # END_YOUR_CODE
 
