@@ -45,8 +45,7 @@ class SegmentationProblem(util.Problem):
 
     def initialState(self):
         """ Metodo que implementa retorno da posicao inicial """
-        self.state = (self.query, "")
-        return self.state
+        return ((self.query, ""))
 
     def actions(self, state):
         """ Metodo que implementa retorno da lista de acoes validas
@@ -54,7 +53,7 @@ class SegmentationProblem(util.Problem):
         """
         acoes = [] #lista de tuplas
         entrada = state[0]
-        for i in range(0, len(entrada)):
+        for i in range(len(entrada)):
             dire=entrada[-i-1:]
             esq = entrada[:-i-1]
             if state[1] == '': add = [dire]
@@ -65,8 +64,7 @@ class SegmentationProblem(util.Problem):
 
     def nextState(self, state, action):
         """ Metodo que implementa funcao de transicao """
-        nxtS = (action[0], action[1])
-        return nxtS
+        return ((action[0], action[1]))
 
     def isGoalState(self, state):
         """ Metodo que implementa teste de meta """
@@ -75,9 +73,9 @@ class SegmentationProblem(util.Problem):
     def stepCost(self, state, action):
         """ Metodo que implementa funcao custo """
         #o custo sera uma subtracao entre o custo da acao e do estado
-        custoEstado = sum([self.unigramCost(i) for i in state[1].split()])
-        custoAcao = sum([self.unigramCost(i) for i in action[1].split()])
-        return custoAcao - custoEstado
+        sCost = sum([self.unigramCost(i) for i in state[1].split()])
+        aCost = sum([self.unigramCost(i) for i in action[1].split()])
+        return aCost - sCost
 
 def segmentWords(query, unigramCost):
 
