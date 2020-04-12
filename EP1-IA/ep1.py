@@ -45,7 +45,7 @@ class SegmentationProblem(util.Problem):
 
     def initialState(self):
         """ Metodo que implementa retorno da posicao inicial """
-        self.state = (self.query, str())
+        self.state = (self.query, "")
         return self.state
 
     def actions(self, state):
@@ -106,37 +106,61 @@ class VowelInsertionProblem(util.Problem):
 
     def isState(self, state):
         """ Metodo  que implementa verificacao de estado """
-        raise NotImplementedError
+        return True
 
     def initialState(self):
         """ Metodo  que implementa retorno da posicao inicial """
-        raise NotImplementedError
+        qw = self.queryWords
+        qw.insert(0, "-BEGIN-") #palavra especial do enunciado
+        qw = ' '.join(qw)
+        return((qw, ""))
 
     def actions(self, state):
         """ Metodo  que implementa retorno da lista de acoes validas
         para um determinado estado
         """
-        raise NotImplementedError
+        acoes = []
+        entrada = state[0].split()
+        if len(entrada) >= 2:
+            pf = self.possibleFills(entrada[1])
+            if pf: acoes = [(entrada[0], i) for i in pf]
+            else: acoes.append(("", entrada[1]))
+        else:
+            pf = self.possibleFills(entrada[0])
+            acoes = [("", i) for i in pf]
+        return acoes
 
     def nextState(self, state, action):
         """ Metodo que implementa funcao de transicao """
-        raise NotImplementedError
+        antiga = state[0].split()
+        nova = state[1]
+        if action[0]:
+            antiga.pop(0)
+            antiga.pop(0)
+            nova = state[1]+" "+action[1]
+            if antiga:
+                antiga.insert(0, action[1])
+                antiga=" ".join(antiga)
+                return((antiga, nova))
+            return(("", nova))
+        return(("", action[1]))
 
     def isGoalState(self, state):
         """ Metodo que implementa teste de meta """
-        raise NotImplementedError
+        return state[0]=="" or state[0]=="-BEGIN-"
 
     def stepCost(self, state, action):
         """ Metodo que implementa funcao custo """
-        raise NotImplementedError
-
-
+        return self.bigramCost(action[0], action[1])
 
 def insertVowels(queryWords, bigramCost, possibleFills):
     # BEGIN_YOUR_CODE 
+    obj = util.uniformCostSearch(VowelInsertionProblem(queryWords, bigramCost, possibleFills))
+    return " ".join(obj.state[1].split())
     # Voce pode usar a função getSolution para recuperar a sua solução a partir do no meta
     # valid,solution  = util.getSolution(goalNode,problem)
-    raise NotImplementedError
+
+    #raise NotImplementedError
     # END_YOUR_CODE
 
 ############################################################
