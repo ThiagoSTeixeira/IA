@@ -1,3 +1,6 @@
+%Thiago Santos Teixeira
+%nUSP 10736987
+
 %%%%% Insira aqui os seus predicados.
 %%%%% Use quantos predicados auxiliares julgar necess�rio
 
@@ -25,6 +28,16 @@ uniao_conjunto(Cs, Ds, Es) :-
 juncao([], _, _, _, []).
 juncao(_, [], _, _, []).
 juncao(_, _, [], [], []).
+
+juncao(L1, L2, [], [H|T], [H|T2]) :- member(H, L1), !, juncao(L1, L2, [], T, T2).
+juncao(L1, L2, [], [_|T], T2) :- juncao(L1, L2, [], T, T2).
+
+juncao(L1, L2, [H|T3], T, [H|T2]) :- member(H, L2), !, juncao(L1, L2, T3, T, T2).
+juncao(L1, L2, [_|T3], T, T2) :- juncao(L1, L2, T3, T, T2).
+
+inter_conjunto(Cs, Ds, Es) :- 
+    lista_para_conjunto(Cs, Cs2), lista_para_conjunto(Ds, Ds2),
+    juncao(Cs2, Ds2, Cs2, Ds2, Es2), lista_para_conjunto(Es2, Es).
 
 
 %Exercicio 5
