@@ -1,14 +1,44 @@
 %%%%% Insira aqui os seus predicados.
-%%%%% Use quantos predicados auxiliares julgar necessário
+%%%%% Use quantos predicados auxiliares julgar necessï¿½rio
+
+%Exercicio 1
+pl([], _, []).
+pl([H|T], L, Cs) :- member(H, L), !, pl(T, L, Cs). %! = cut
+pl([H|T], L, [H|Cs]) :- !, pl(T, [H|L], Cs).
+
+permut([],[]).
+permut([H|T], X) :- permut(T, Y), select(H, X, Y).
+
+lista_para_conjunto(Xs, Cs) :- pl(Xs, [], Cs).
+
+%Exercicio 2
+mesmo_conjunto(Cs, Ds) :- lista_para_conjunto(Cs, X), permut(X, Ds).
+
+%Exercicio 3
+junta([], L, L).
+junta([H|T], L, [H|E]) :- junta(T, L, E).
+uniao_conjunto(Cs, Ds, Es) :- 
+    lista_para_conjunto(Cs, Cs2), lista_para_conjunto(Ds, Ds2),
+    junta(Cs2, Ds2, Es2), lista_para_conjunto(Es2, Es).
+
+%Exercicio 4
+juncao([], _, _, _, []).
+juncao(_, [], _, _, []).
+juncao(_, _, [], [], []).
 
 
+%Exercicio 5
 
+dif([], _, []).
+dif([H|T], L, X) :- member(H, L), !, dif(T, L, X).
+dif([H|T], L, [H|X]) :- !, dif(T, L, X).
 
-
-
+diferenca_conjunto(Cs, Ds, Es) :- 
+    lista_para_conjunto(Cs, Cs2), lista_para_conjunto(Ds, Ds2),
+    dif(Cs2, Ds2, Es).
 
 %%%%%%%% Fim dos predicados adicionados
-%%%%%%%% Os testes começam aqui.
+%%%%%%%% Os testes comeï¿½am aqui.
 %%%%%%%% Para executar os testes, use a consulta:   ?- run_tests.
 
 %%%%%%%% Mais informacoes sobre testes podem ser encontradas em:
