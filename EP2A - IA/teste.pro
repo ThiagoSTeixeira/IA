@@ -1,1 +1,0 @@
-plebeu(salame, queijo).
