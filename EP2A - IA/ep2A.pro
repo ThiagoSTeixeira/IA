@@ -39,9 +39,7 @@ inter_conjunto(Cs, Ds, Es) :-
     lista_para_conjunto(Cs, Cs2), lista_para_conjunto(Ds, Ds2),
     juncao(Cs2, Ds2, Cs2, Ds2, Es2), lista_para_conjunto(Es2, Es).
 
-
 %Exercicio 5
-
 dif([], _, []).
 dif([H|T], L, X) :- member(H, L), !, dif(T, L, X).
 dif([H|T], L, [H|X]) :- !, dif(T, L, X).
