@@ -101,6 +101,8 @@ class BlackjackMDP(util.MDP):
             return n
 
         def remainingCardsIndex(deck):
+            """returns the index of cards that are still on the deck
+            """
             ans = []
             for i in range(len(deck)):
                 if deck[i] > 0:
@@ -138,8 +140,8 @@ class BlackjackMDP(util.MDP):
                         nextState = (nextState[0], None, None)
                     if countRemainingCards(newDeck) == 0:
                         nextState = (nextState[0], nextState[1], None)
-                        rwd = nextState[0]
-                    ans.append(nextState, deck[i] / cardCount, r)
+                        r = nextState[0]
+                    ans.append((nextState, deck[i] / cardCount, r))
             return ans
 
         # END_YOUR_CODE
@@ -194,7 +196,20 @@ class ValueIteration(util.MDPAlgorithm):
         V = defaultdict(float)  # state -> value of state
         # Implement the main loop of Asynchronous Value Iteration Here:
         # BEGIN_YOUR_CODE
-        raise Exception("Not implemented yet")
+        end = False
+        while not end:
+            vLine = defaultdict(lambda: -float("inf"))
+            for state in mdp.state:
+                for action in mdp.actions(state):
+                    q = computeQ(mdp, V, state, action)
+                    if q > vLine[s]:
+                        vLine[s] = q
+            end = True
+            for v, vline in V, vLine:
+                if abs(v - vLine) < epsilon:
+                    end = False
+            V[:] = vLine[:]
+
         # END_YOUR_CODE
 
         # Extract the optimal policy now

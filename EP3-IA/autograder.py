@@ -5,6 +5,7 @@ import math
 import signal
 import time
 import pylint.lint
+
 try:
     from ep3 import *
 except Exception as e:
@@ -36,8 +37,9 @@ TOLERANCE = 0.0001
 MAX_TESTS = 50
 
 
-class Timeout():
+class Timeout:
     """Timeout class using ALARM signal."""
+
     class Timeout(Exception):
         pass
 
@@ -49,7 +51,7 @@ class Timeout():
         signal.alarm(self.sec)
 
     def __exit__(self, *args):
-        signal.alarm(0)    # disable alarm
+        signal.alarm(0)  # disable alarm
 
     def raise_timeout(self, *args):
         raise Timeout.Timeout()
@@ -61,14 +63,22 @@ def run_tests():
     else:
         file_flag = "w"
     file_results = open("final_result.txt", file_flag)
-    final_grades = [0.0,0.0,0.0,0.0,0.0,0.0,0.0]  # Grade list (code, p01_01, p01_02, p02, p03)
-    lint_result = pylint.lint.Run(['ep3.py'], do_exit=False)
+    final_grades = [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+    ]  # Grade list (code, p01_01, p01_02, p02, p03)
+    lint_result = pylint.lint.Run(["ep3.py"], do_exit=False)
     for k in lint_result.linter.stats["by_module"]:
         mod_name = k
     msg_types = lint_result.linter.stats["by_module"][mod_name]
-    msg_names = lint_result.linter.stats['by_msg']
-    if 'global_note' in lint_result.linter.stats:
-        lint_score = lint_result.linter.stats['global_note']
+    msg_names = lint_result.linter.stats["by_msg"]
+    if "global_note" in lint_result.linter.stats:
+        lint_score = lint_result.linter.stats["global_note"]
     else:
         lint_score = -1000.0
     file_results.write("******************************\n")
@@ -93,7 +103,7 @@ def run_tests():
         file_results.write("{0}:\t{1}\n".format(k2, v2))
     file_results.write("******************************\n")
     file_results.write("Tests:\n")
-    final_grades[0]=lint_score
+    final_grades[0] = lint_score
 
     global_results = 0  # Student's result in all tests for all parts
     total_tests_global = 0  # Number of tests performed in all parts
@@ -106,28 +116,31 @@ def run_tests():
     try:
         file_results.write("------------------------------\n")
         file_results.write("Parte01-01 Modeling MDPs:\n")
-        smallMDP = BlackjackMDP(valores_cartas=[1, 5], multiplicidade=2,
-                                       limiar=15, custo_espiada=1)
-        preEmptyState = (11, None, (1,0))
+        smallMDP = BlackjackMDP(
+            valores_cartas=[1, 5], multiplicidade=2, limiar=15, custo_espiada=1
+        )
+        preEmptyState = (11, None, (1, 0))
         # Make sure the succAndProbReward function is implemented correctly.
         tests = [
-            ([((12, None, None), 1, 12)], smallMDP, preEmptyState, 'Pegar'),
-            ([((5, None, (2, 1)), 1, 0)], smallMDP, (0, 1, (2, 2)), 'Pegar')
+            ([((12, None, None), 1, 12)], smallMDP, preEmptyState, "Pegar"),
+            ([((5, None, (2, 1)), 1, 0)], smallMDP, (0, 1, (2, 2)), "Pegar"),
         ]
         for gold, mdp, state, action in tests:
             total_tests_global += 1
             total_tests += 1
             with Timeout(10):
-                if  gold==mdp.succAndProbReward(state, action):
+                if gold == mdp.succAndProbReward(state, action):
                     test_results += 1
-        file_results.write("Modeling MDPs:\t{0}/{1} correct\n".format(test_results, total_tests))
+        file_results.write(
+            "Modeling MDPs:\t{0}/{1} correct\n".format(test_results, total_tests)
+        )
         global_results += test_results
         part_correct += test_results
         part_tests += total_tests
         test_results = 0
         total_tests = 0
         if part_tests > 0:
-            final_grades[1]=(10.0*part_correct)/part_tests
+            final_grades[1] = (10.0 * part_correct) / part_tests
         part_correct = 0
         part_tests = 0
         # End of Part01
@@ -150,16 +163,18 @@ def run_tests():
     except Timeout.Timeout:
         file_results.write("Test did not conclude in time\n")
         file_results.write("Receiving proportional grade in the test\n")
-        final_grades[1]=(10.0*test_results)/2.0
+        final_grades[1] = (10.0 * test_results) / 2.0
     except Exception as e:
         file_results.write("Python error: {0}\n".format(e))
         file_results.write("Test did not conclude\n")
         file_results.write("Receiving grade 0.0 in the test\n")
     else:
         file_results.write("Test concluded without errors\n")
-        
+
     finally:
-        file_results.write("Grade in the Test01: {0:.1f}/10.0\n".format(final_grades[1]))
+        file_results.write(
+            "Grade in the Test01: {0:.1f}/10.0\n".format(final_grades[1])
+        )
 
     try:
         test_results = 0
@@ -173,11 +188,13 @@ def run_tests():
         total_tests += 1
         samePolicy = True
         for _, val in alg.pi.items():
-            if val=="Espiar":
+            if val == "Espiar":
                 samePolicy = False
         if samePolicy:
-            test_results +=1
-        file_results.write("ValueIteration:\t{0}/{1} correct\n".format(test_results, total_tests))
+            test_results += 1
+        file_results.write(
+            "ValueIteration:\t{0}/{1} correct\n".format(test_results, total_tests)
+        )
         global_results += test_results
         part_correct += test_results
         part_tests += total_tests
@@ -185,7 +202,7 @@ def run_tests():
         total_tests = 0
 
         if part_tests > 0:
-            final_grades[2] = (10.0*part_correct)/part_tests
+            final_grades[2] = (10.0 * part_correct) / part_tests
         part_correct = 0
         part_tests = 0
         # End of Part02-01
@@ -208,17 +225,18 @@ def run_tests():
     except Timeout.Timeout:
         file_results.write("Test did not conclude in time\n")
         file_results.write("Receiving proportional grade in the test\n")
-        final_grades[2] = (10.0*test_results)
+        final_grades[2] = 10.0 * test_results
     except Exception as e:
         file_results.write("Python error: {0}\n".format(e))
         file_results.write("Test did not conclude\n")
         file_results.write("Receiving grade 0.0 in the test\n")
     else:
         file_results.write("Test concluded without errors\n")
-        #file_results.write("Grade in the test: {0:.1f}/10.0\n".format(final_grades[0]))
+        # file_results.write("Grade in the test: {0:.1f}/10.0\n".format(final_grades[0]))
     finally:
-        file_results.write("Grade in the Test02-01: {0:.1f}/10.0\n".format(final_grades[2]))
-
+        file_results.write(
+            "Grade in the Test02-01: {0:.1f}/10.0\n".format(final_grades[2])
+        )
 
     try:
         test_results = 0
@@ -226,17 +244,20 @@ def run_tests():
         file_results.write("------------------------------\n")
         file_results.write("Part02-02 Peeking MDP:\n")
 
-        
         mdpP = geraMDPxereta()
         vi = ValueIteration()
         with Timeout(10):
             vi.solve(mdpP)
         total_tests_global += 1
         total_tests += 1
-        f = len([a for a in vi.pi.values() if a == 'Espiar']) / float(len(vi.pi.values()))
+        f = len([a for a in vi.pi.values() if a == "Espiar"]) / float(
+            len(vi.pi.values())
+        )
         if f >= 0.1:
-            test_results +=1
-        file_results.write("Peeking MDP:\t{0}/{1} correct\n".format(test_results, total_tests))
+            test_results += 1
+        file_results.write(
+            "Peeking MDP:\t{0}/{1} correct\n".format(test_results, total_tests)
+        )
         global_results += test_results
         part_correct += test_results
         part_tests += total_tests
@@ -244,7 +265,7 @@ def run_tests():
         total_tests = 0
 
         if part_tests > 0:
-            final_grades[2] = (10.0*part_correct)/part_tests
+            final_grades[2] = (10.0 * part_correct) / part_tests
         part_correct = 0
         part_tests = 0
         # End of Part02-02
@@ -267,45 +288,50 @@ def run_tests():
     except Timeout.Timeout:
         file_results.write("Test did not conclude in time\n")
         file_results.write("Receiving proportional grade in the test\n")
-        final_grades[2] = (10.0*test_results)
+        final_grades[2] = 10.0 * test_results
     except Exception as e:
         file_results.write("Python error: {0}\n".format(e))
         file_results.write("Test did not conclude\n")
         file_results.write("Receiving grade 0.0 in the test\n")
     else:
         file_results.write("Test concluded without errors\n")
-        #file_results.write("Grade in the test: {0:.1f}/10.0\n".format(final_grades[0]))
+        # file_results.write("Grade in the test: {0:.1f}/10.0\n".format(final_grades[0]))
     finally:
-        file_results.write("Grade in the Test02-02: {0:.1f}/10.0\n".format(final_grades[2]))
-
+        file_results.write(
+            "Grade in the Test02-02: {0:.1f}/10.0\n".format(final_grades[2])
+        )
 
     try:
         test_results = 0
         total_tests = 0
         file_results.write("------------------------------\n")
         file_results.write("Part03-01 QLearningAlgorithm:\n")
-        #-------------------------------------------------
+        # -------------------------------------------------
         total_tests_global += 4
         total_tests += 4
         lineMDP = util.NumberLineMDP()
         lineMDP.computeStates()
         with Timeout(10):
-            rl = QLearningAlgorithm(lineMDP.actions, lineMDP.discount(),identityFeatureExtractor,0)
+            rl = QLearningAlgorithm(
+                lineMDP.actions, lineMDP.discount(), identityFeatureExtractor, 0
+            )
         rl.numIters = 1
         with Timeout(10):
             rl.incorporateFeedback(0, 1, 0, 1)
-            if rl.getQ(0, -1)== 0:
-                test_results +=1
+            if rl.getQ(0, -1) == 0:
+                test_results += 1
             if rl.getQ(0, 1) == 0:
-                test_results +=1
+                test_results += 1
         with Timeout(10):
             rl.incorporateFeedback(2, -1, 1, 1)
             if rl.getQ(2, -1) == 1:
                 test_results += 1
             if rl.getQ(2, 1) == 0:
                 test_results += 1
-        #-------------------------------------------------
-        file_results.write("QLearningAlgorithm:\t{0}/{1} correct\n".format(test_results, total_tests))
+        # -------------------------------------------------
+        file_results.write(
+            "QLearningAlgorithm:\t{0}/{1} correct\n".format(test_results, total_tests)
+        )
         global_results += test_results
         part_correct += test_results
         part_tests += total_tests
@@ -313,7 +339,7 @@ def run_tests():
         total_tests = 0
 
         if part_tests > 0:
-            final_grades[3] = (10.0*part_correct)/part_tests
+            final_grades[3] = (10.0 * part_correct) / part_tests
         part_correct = 0
         part_tests = 0
         # End of Part03-01
@@ -336,16 +362,18 @@ def run_tests():
     except Timeout.Timeout:
         file_results.write("Test did not conclude in time\n")
         file_results.write("Receiving proportional grade in the test\n")
-        final_grades[3] = (10.0*test_results)/4.0
+        final_grades[3] = (10.0 * test_results) / 4.0
     except Exception as e:
         file_results.write("Python error: {0}\n".format(e))
         file_results.write("Test did not conclude\n")
         file_results.write("Receiving grade 0.0 in the test\n")
     else:
         file_results.write("Test concluded without errors\n")
-        #file_results.write("Grade in the test: {0:.1f}/10.0\n".format(final_grades[0]))
+        # file_results.write("Grade in the test: {0:.1f}/10.0\n".format(final_grades[0]))
     finally:
-        file_results.write("Grade in the Test03-01: {0:.1f}/10.0\n".format(final_grades[3]))
+        file_results.write(
+            "Grade in the Test03-01: {0:.1f}/10.0\n".format(final_grades[3])
+        )
 
     # try:
     #     test_results = 0
@@ -408,13 +436,13 @@ def run_tests():
     #     #file_results.write("Grade in the test: {0:.1f}/10.0\n".format(final_grades[0]))
     # finally:
     #     file_results.write("Grade in the Test03-02: {0:.1f}/10.0\n".format(final_grades[4]))
-    
+
     # Concluding and updating csv with grades
     if os.path.exists("../results.csv"):
         csv_flag = "a"
     else:
         csv_flag = "w"
-    #pdb.set_trace()
+    # pdb.set_trace()
 
     results_csv = open("../results.csv", csv_flag)
     if len(final_grades) == 5:

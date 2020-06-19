@@ -98,3 +98,354 @@ Python error: Not implemented yet
 Test did not conclude
 Receiving grade 0.0 in the test
 Grade in the Test03-01: 0.0/10.0
+******************************
+Code quality:
+------------------------------
+Code grade: 5.57/10.0	(Code with reasonably quality)
+------------------------------
+Standards deviation:
+statement:	0
+info:	0
+convention:	39
+refactor:	1
+warning:	6
+error:	1
+fatal:	0
+------------------------------
+Deviation description:
+singleton-comparison:	2
+invalid-name:	36
+consider-using-enumerate:	1
+pointless-statement:	1
+unsubscriptable-object:	1
+arguments-differ:	1
+unreachable:	1
+unused-argument:	3
+too-few-public-methods:	1
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test01: 0.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-01: 0.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-02: 0.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test03-01: 0.0/10.0
+******************************
+Code quality:
+------------------------------
+Code grade: 5.57/10.0	(Code with reasonably quality)
+------------------------------
+Standards deviation:
+statement:	0
+info:	0
+convention:	39
+refactor:	1
+warning:	6
+error:	1
+fatal:	0
+------------------------------
+Deviation description:
+singleton-comparison:	2
+invalid-name:	36
+consider-using-enumerate:	1
+pointless-statement:	1
+unsubscriptable-object:	1
+arguments-differ:	1
+unreachable:	1
+unused-argument:	3
+too-few-public-methods:	1
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test01: 0.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-01: 0.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-02: 0.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test03-01: 0.0/10.0
+******************************
+Code quality:
+------------------------------
+Code grade: 5.57/10.0	(Code with reasonably quality)
+------------------------------
+Standards deviation:
+statement:	0
+info:	0
+convention:	39
+refactor:	1
+warning:	6
+error:	1
+fatal:	0
+------------------------------
+Deviation description:
+singleton-comparison:	2
+invalid-name:	36
+consider-using-enumerate:	1
+pointless-statement:	1
+unsubscriptable-object:	1
+arguments-differ:	1
+unreachable:	1
+unused-argument:	3
+too-few-public-methods:	1
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test01: 0.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-01: 0.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-02: 0.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test03-01: 0.0/10.0
+******************************
+Code quality:
+------------------------------
+Code grade: 5.57/10.0	(Code with reasonably quality)
+------------------------------
+Standards deviation:
+statement:	0
+info:	0
+convention:	39
+refactor:	1
+warning:	6
+error:	1
+fatal:	0
+------------------------------
+Deviation description:
+singleton-comparison:	2
+invalid-name:	36
+consider-using-enumerate:	1
+pointless-statement:	1
+unsubscriptable-object:	1
+arguments-differ:	1
+unreachable:	1
+unused-argument:	3
+too-few-public-methods:	1
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test01: 0.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-01: 0.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-02: 0.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test03-01: 0.0/10.0
+******************************
+Code quality:
+------------------------------
+Code grade: 5.57/10.0	(Code with reasonably quality)
+------------------------------
+Standards deviation:
+statement:	0
+info:	0
+convention:	39
+refactor:	1
+warning:	6
+error:	1
+fatal:	0
+------------------------------
+Deviation description:
+singleton-comparison:	2
+invalid-name:	36
+consider-using-enumerate:	1
+pointless-statement:	1
+unsubscriptable-object:	1
+arguments-differ:	1
+unreachable:	1
+unused-argument:	3
+too-few-public-methods:	1
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test01: 0.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-01: 0.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-02: 0.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test03-01: 0.0/10.0
+******************************
+Code quality:
+------------------------------
+Code grade: 5.57/10.0	(Code with reasonably quality)
+------------------------------
+Standards deviation:
+statement:	0
+info:	0
+convention:	39
+refactor:	1
+warning:	6
+error:	1
+fatal:	0
+------------------------------
+Deviation description:
+singleton-comparison:	2
+invalid-name:	36
+consider-using-enumerate:	1
+pointless-statement:	1
+unsubscriptable-object:	1
+arguments-differ:	1
+unreachable:	1
+unused-argument:	3
+too-few-public-methods:	1
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test01: 0.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-01: 0.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-02: 0.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test03-01: 0.0/10.0
+******************************
+Code quality:
+------------------------------
+Code grade: 5.04/10.0	(Code with reasonably quality)
+------------------------------
+Standards deviation:
+statement:	0
+info:	0
+convention:	42
+refactor:	1
+warning:	5
+error:	3
+fatal:	0
+------------------------------
+Deviation description:
+singleton-comparison:	2
+invalid-name:	39
+consider-using-enumerate:	1
+pointless-statement:	1
+unsubscriptable-object:	1
+arguments-differ:	1
+undefined-variable:	2
+unused-variable:	1
+too-few-public-methods:	1
+unused-argument:	2
+******************************
+Tests:
+------------------------------
+Parte01-01 Modeling MDPs:
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test01: 0.0/10.0
+------------------------------
+Part02-01 ValueIteration::
+Python error: append() takes exactly one argument (3 given)
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-01: 0.0/10.0
+------------------------------
+Part02-02 Peeking MDP:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test02-02: 0.0/10.0
+------------------------------
+Part03-01 QLearningAlgorithm:
+Python error: Not implemented yet
+Test did not conclude
+Receiving grade 0.0 in the test
+Grade in the Test03-01: 0.0/10.0
