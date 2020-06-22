@@ -106,7 +106,7 @@ class BlackjackMDP(util.MDP):
             ans = []
             for i in range(len(deck)):
                 if deck[i] > 0:
-                    ans.append[i]
+                    ans.append(i)
             return ans
 
         def rmvCard(card, deck):
@@ -118,11 +118,15 @@ class BlackjackMDP(util.MDP):
 
         if action == "Sair":
             return [(state[0], None, None), 1, state[0]]
+
         if action == "Espiar":
+            if state[1] != None:
+                return []
             for i in remainingCardsIndex(deck):
                 nextState = (state[0], i, deck)
-                ans.append(nextState, deck[i] / cardCount, -self.custo_espiada)
+                ans.append((nextState, deck[i] / cardCount, -self.custo_espiada))
             return ans
+
         if action == "Pegar":
             if state[1] != None:  # acao anterior = espiar
                 deck = rmvCard(state[1], deck)
@@ -130,18 +134,18 @@ class BlackjackMDP(util.MDP):
                 if nextState[0] > self.limiar:
                     return ((nextState[0], None, None), 1, 0)
                 return (nextState, 1, 0)
-
-            for i in range(len(self.valores_cartas)):
-                if deck[i] > 0:
-                    r = 0
-                    newDeck = rmvCard(i, deck)
-                    nextState = (state[0] + self.valores_cartas[i], None, newDeck)
-                    if nextState[0] > self.limiar:
-                        nextState = (nextState[0], None, None)
-                    if countRemainingCards(newDeck) == 0:
-                        nextState = (nextState[0], nextState[1], None)
-                        r = nextState[0]
-                    ans.append((nextState, deck[i] / cardCount, r))
+            else:
+                for i in deck:
+                    if deck[i] > 0:
+                        r = 0
+                        newDeck = rmvCard(i, deck)
+                        nextState = (state[0] + self.valores_cartas[i], None, newDeck)
+                        if nextState[0] > self.limiar:
+                            nextState = (nextState[0], None, None)
+                        if countRemainingCards(newDeck) == 0:
+                            nextState = (nextState[0], nextState[1], None)
+                            r = nextState[0]
+                        ans.append((nextState, deck[i] / cardCount, r))
             return ans
 
         # END_YOUR_CODE
@@ -198,17 +202,17 @@ class ValueIteration(util.MDPAlgorithm):
         # BEGIN_YOUR_CODE
         end = False
         while not end:
-            vLine = defaultdict(lambda: -float("inf"))
-            for state in mdp.state:
+            vLine = defaultdict(lambda: -math.inf)
+            for state in mdp.states:
                 for action in mdp.actions(state):
                     q = computeQ(mdp, V, state, action)
                     if q > vLine[s]:
                         vLine[s] = q
             end = True
-            for v, vline in V, vLine:
-                if abs(v - vLine) < epsilon:
+            for k in vLine.keys():
+                if abs(V[k] - vLine[k]) > epsilon:
                     end = False
-            V[:] = vLine[:]
+            V = {**Vline}
 
         # END_YOUR_CODE
 
@@ -232,7 +236,9 @@ def geraMDPxereta():
     optimal action for at least 10% of the states.
     """
     # BEGIN_YOUR_CODE
-    raise Exception("Not implemented yet")
+    return BlackjackMDP(
+        valores_cartas=[5, 10], multiplicidade=4, limiar=15, custo_espiada=1
+    )
     # END_YOUR_CODE
 
 
@@ -296,7 +302,20 @@ class QLearningAlgorithm(util.RLAlgorithm):
          HINT: Remember to check if s is a terminal state and s' None.
         """
         # BEGIN_YOUR_CODE
-        raise Exception("Not implemented yet")
+        if state == None or newState == None:
+            return
+        weights = self.weights
+        for i in self.featureExtractor(state, action):
+            weights[i[0]] += (
+                self.getStepSize()
+                * (
+                    reward
+                    + self.discount * self.getAction(newState)
+                    - self.getQ(state, action)
+                )
+                * i[1]
+            )
+
         # END_YOUR_CODE
 
 
